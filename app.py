@@ -27,6 +27,5 @@ def index():
     all_todos = todos.find()
     return render_template('index.html', todos=all_todos)
 
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(debug=True)
