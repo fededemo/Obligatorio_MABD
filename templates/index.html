@@ -42,7 +42,6 @@
             padding: 5px;
             margin-bottom: 5px;
             margin:  0px;
-
         }
         form textarea{
             padding: 10px;
@@ -76,7 +75,6 @@
             <div style="background-image: url('/static/img/MX_web.jpg'); 
             background-size: cover; height:750px; padding-top:30px;">
             <h1>Nuevo Producto</h1>
-            <hr>
                 <div class="content" >
                     <form  method="post" >
                         <p>
@@ -84,28 +82,44 @@
                         <br/>
                             <input type="text" name="content"
                                 placeholder="Insertar nombre.."></input>
-                        </p>
-                        <p>
-                            <b><label for="degree">Tipo Producto</label></b>
                         <br/>
-                            <input id="degree-0" name="degree" required type="radio" value="Cars">
-                            <label for="category">Auto</label>
-                            <input id="degree-1" name="degree" required type="radio" value="Accesories">
-                            <label for="degree-1">Accesorios</label>
-                            <input id="degree-2" name="degree" required type="radio" value="Other">
-                            <label for="degree-2">Otros</label>
-                        </p>
-                        <p>
-                            <select class="custom-select custom-select-lg mb-3">
-                                <label for="category"><option selected>Elegir Caracteristica 1..</option></label>
-                                <label for="category-0"></label><option value="1">Velocidad de Carga</option></label>
-                                <label for="category-1"></label><option value="2">Amperaje</option></label>
-                                <label for="category-2"></label><option value="3">Modelo</option></label>
-                              </select>                        
+                            <b><label for="tipo">Tipo Producto</label></b>
                         <br/>
-                            <label class="sr-only" for="category" >Name</label>
-                            <input type="text" name="category" class="form-control mb-2 mr-sm-2" id="category" placeholder="Valor Caractersitica 1..">                                  
-                        </p>
+                            <input id="tipo-0" name="tipo" required type="radio" value="Cars">
+                            <label for="tipo-0">Auto</label>
+                            <input id="tipo-1" name="tipo" required type="radio" value="Accesories">
+                            <label for="tipo-1">Accesorios</label>
+                            <input id="tipo-2" name="tipo" required type="radio" value="Other">
+                            <label for="tipo-2">Otros</label>
+                        <br/>
+                            <b><label for="price">Precio</label></b>
+                        <br/>
+                            <input type="number" name="price"
+                                placeholder="Precio en USD.."></input>
+                        <br/>
+                            <b><label for="notes">Descripcion</label></b>
+                        <br/>
+                            <textarea name="notes"
+                                placeholder="Descripcion.."></textarea>
+                        <br/>
+                            <b><label for="model">Modelo</label></b>
+                        <br/>
+                            <input type="text" name="model"
+                                placeholder="Modelo..."></input>
+                        <br/>                        
+                        <br/>
+                            <b><label for="velocity">Velocidad de Carga</label></b>
+                        <br/>
+                            <input type="number" name="velocity"
+                                placeholder="Valor..."></input>
+                        <br/>                        
+                        <br/>
+                            <b><label for="amper">Amperaje</label></b>
+                        <br/>
+                            <input type="number" name="amper"
+                                placeholder="Valor..."></input>
+                        <br/>                                                
+                    </p>
                         <button type="submit">Submit</button>
                     </form>
                 </div>
@@ -118,9 +132,7 @@
                 <div class="content" >
                     <hr>
                     {% for todo in todos %}
-                        <div class="todo">
-                            <p>{{ todo['content'] }} <i>({{ todo['degree']}})</i> <i>({{ todo['category']}})</i></p>
-                        </div>
+                        <h3>{{todo}}</h3>
                     {% endfor %}
                 <!--Footer--> 
                 <footer style="height:auto; background-color:#d1cab3;">
