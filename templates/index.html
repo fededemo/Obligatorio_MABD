@@ -1,64 +1,144 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <!-- Bootstrap CSS -->
+    <link rel=”stylesheet” href=”https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css”rel=”nofollow” integrity=”sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm” crossorigin=”anonymous”>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
     <meta charset="utf-8">
+    <div class="container">
+        <div class="w3-top">
+            <div class="w3-bar w3-black w3-car" id="myNavbar">
+              <a class="w3-bar-item w3-button w3-hover-black w3-hide-medium w3-hide-large w3-right" href="javascript:void(0);" onclick="toggleFunction()" title="Toggle Navigation Menu">
+                <i class="fa fa-bars"></i>
+              </a>
+            <a class="w3-bar-item">T E S L A products/</a>
+            <a href="{{ url_for('index') }}" class="w3-bar-item w3-button w3-hide-small"> Crear Nuevo Producto</a>
+            <a href="{{ url_for('view_catalog') }}" class="w3-bar-item w3-button w3-hide-small"> Ver Catalogo Actual</a>
+        </div>
+    </div>
     <title>Catalogo de Productos Tesla (obligatorio MABD)</title>
     <style>
         .todo {
             padding: 20px;
             margin: 10px;
-            background-color: #eee;
+            background-color: rgba(0,0, 0, 0.5);
         }
+        form {
+            width: 300px;
+            padding:5px;
+            margin: 10px;
+            background-color: rgba(87, 84, 84, 0.85);
+            background-size: cover;
+            background-position: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        form input{
+            padding: 5px;
+            margin-bottom: 5px;
+            margin:  0px;
+
+        }
+        form textarea{
+            padding: 10px;
+            margin-bottom: 5px;
+            margin:  5px;
+
+        }
+        form button{
+            padding: 10px;
+            margin:  0px;
+
+        }
+        .backg {
+            background-image: url('/static/img/AWD3.jpg'), url('/static/img/MX_web2.jpg');
+            height:400px, 400px; 
+            background-repeat: no-repeat, repeat;
+            background-size: cover, cover; 
+            padding: 40px;
+        }
+        form label {
+            margin-bottom: 5px;
+            margin:  5px;
+        }
+
+
     </style>
 </head>
-
 <body>
-    <!--First section-->
-    <div style="background-image: url('/static/img/tesla-fleet.jpg'); 
-    background-size: cover; height:480px; padding-top:80px;">
-    <h1>Catalogo de Productos</h1>
-    <hr>
-    <div class="content">
-    <form method="post">
-        <p>
-            <b><label for="content">Todo content</label></b>
-        </p>
-        <p>
-            <input type="text" name="content"
-                placeholder="Nombre Producto:"></input>
-        </p>
+        {% if title == "First Page"%}
+            <!--First section-->
+            <div style="background-image: url('/static/img/MX_web.jpg'); 
+            background-size: cover; height:750px; padding-top:30px;">
+            <h1>Nuevo Producto</h1>
+            <hr>
+                <div class="content" >
+                    <form  method="post" >
+                        <p>
+                            <b><label for="content">Producto</label></b>
+                        <br/>
+                            <input type="text" name="content"
+                                placeholder="Insertar nombre.."></input>
+                        </p>
+                        <p>
+                            <b><label for="degree">Tipo Producto</label></b>
+                        <br/>
+                            <input id="degree-0" name="degree" required type="radio" value="Cars">
+                            <label for="category">Auto</label>
+                            <input id="degree-1" name="degree" required type="radio" value="Accesories">
+                            <label for="degree-1">Accesorios</label>
+                            <input id="degree-2" name="degree" required type="radio" value="Other">
+                            <label for="degree-2">Otros</label>
+                        </p>
+                        <p>
+                            <select class="custom-select custom-select-lg mb-3">
+                                <label for="category"><option selected>Elegir Caracteristica 1..</option></label>
+                                <label for="category-0"></label><option value="1">Velocidad de Carga</option></label>
+                                <label for="category-1"></label><option value="2">Amperaje</option></label>
+                                <label for="category-2"></label><option value="3">Modelo</option></label>
+                              </select>                        
+                        <br/>
+                            <label class="sr-only" for="category" >Name</label>
+                            <input type="text" name="category" class="form-control mb-2 mr-sm-2" id="category" placeholder="Valor Caractersitica 1..">                                  
+                        </p>
+                        <button type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        {% else %}
+            <!--Second-->
+            <div class="backg">
+            <h1>Catalogo de Productos</h1>
+            <hr>
+                <div class="content" >
+                    <hr>
+                    {% for todo in todos %}
+                        <div class="todo">
+                            <p>{{ todo['content'] }} <i>({{ todo['degree']}})</i> <i>({{ todo['category']}})</i></p>
+                        </div>
+                    {% endfor %}
+                <!--Footer--> 
+                <footer style="height:auto; background-color:#d1cab3;">
+                    <h1>
+                        Obligatorio MABD 2022
+                    </h1>
 
-        <p>
-            <b><label for="degree">Degree</label></b>
-        </p>
-        <p>
-            <input id="degree-0" name="degree" required type="radio" value="Automovil">
-            <label for="degree-0">Automovil</label>
-        </p>
-        <p>
-            <input id="degree-1" name="degree" required type="radio" value="no Automovil">
-            <label for="degree-1">no Automovil</label>
-        </p>
-        <button type="submit">Submit</button>
-    </form>
-    <hr>
-    {% for todo in todos %}
-        <div class="todo">
-            <p>{{ todo['content'] }} <i>({{ todo['degree']}})</i></p>
+                </footer>
+            </div>
         </div>
-    {% endfor %}
-
-    </div>
-        
-    <!--Footer--> 
-    <footer style="height:auto; background-color:#d1cab3;">
-        <h1>
-            Obligatorio MABD 2022
-        </h1>
-
-    </footer>
+        {% endif %}
+                    
     
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 </body>
 

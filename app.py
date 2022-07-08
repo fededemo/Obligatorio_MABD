@@ -1,7 +1,9 @@
 #export FLASK_APP=app
 #export FLASK_ENV=development
 
+from unicodedata import category
 from flask import Flask, render_template, request, url_for, redirect
+from matplotlib.pyplot import title
 from pymongo import MongoClient
 
 app = Flask(__name__)
@@ -21,11 +23,20 @@ def index():
     if request.method=='POST':
         content = request.form['content']
         degree = request.form['degree']
-        todos.insert_one({'content': content, 'degree': degree})
+        category = request.form['category']
+        todos.insert_one({'content': content, 'degree': degree, 'category': category})
         return redirect(url_for('index'))
 
+    return render_template('index.html', title='First Page')
+
+@app.route("/catalog")
+def view_catalog():
     all_todos = todos.find()
-    return render_template('index.html', todos=all_todos)
+    return render_template("index.html", todos=all_todos, title="Catalog")
+
+# @app.route("/second")
+# def view_second_page():
+#     return render_template("index.html", title="Second page")
 
 if __name__ == '__main__':
     app.run(debug=True)
