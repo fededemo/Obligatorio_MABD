@@ -1,5 +1,9 @@
-#export FLASK_APP=app
-#export FLASK_ENV=development
+"""
+Instrucciones para correr localmente
+export FLASK_APP=app
+export FLASK_ENV=development
+flask run
+"""
 
 from unicodedata import category
 from flask import Flask, render_template, request, url_for, redirect
@@ -7,10 +11,13 @@ from pymongo import MongoClient
 
 app = Flask(__name__)
 
+""" 
+Datos de la base MongoDB creada en DigitalOcean
 #username = doadmin
 #password = 42g3Bp97oia615Ud hide
 #host = mongodb+srv://db-mongodb-nyc3-38262-89cd3ee9.mongo.ondigitalocean.com
 #database = admin
+"""
 
 client = MongoClient('mongodb+srv://doadmin:42g3Bp97oia615Ud@db-mongodb-nyc3-38262-89cd3ee9.mongo.ondigitalocean.com/admin?tls=true&authSource=admin&replicaSet=db-mongodb-nyc3-38262')
 db = client.productosTotal
@@ -36,10 +43,6 @@ def index():
 def view_catalog():
     all_todos = todos.find()#todos.find({},{"producto":1,"tipo":1,"price":1,"notes":1,"model":1,"velocity":1,"amper":1})
     return render_template("index.html", todos=all_todos, title="Catalog")
-
-# @app.route("/second")
-# def view_second_page():
-#     return render_template("index.html", title="Second page")
 
 if __name__ == '__main__':
     app.run(debug=True)
